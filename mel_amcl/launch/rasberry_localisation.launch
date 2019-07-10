@@ -19,7 +19,7 @@
     <remap from="gps/fix" to="gps/fix_septentrio"/> <!-- gps input topic name -->
     <!--  <param name="yaw_topic" value="/yaw/septentrio" /> -->
     <remap from="yaw" to="yaw/na"/> <!-- name of earth referenced heading imu type msg -->
-    <param name="gps_log_directory" value="norway" /> <!-- directory name inside the rasberry_localisation packages gps_logs folder: rasberry_localisation/gps_logs/ -->     
+    <param name="gps_log_directory" value="riseholme_06-2019" /> <!-- directory name inside the rasberry_localisation packages gps_logs folder: rasberry_localisation/gps_logs/ -->     
     <param name="gps_yaw_offset_rad" value="$(arg gps_yaw_offset_rad)" />   
  </node> 
 
