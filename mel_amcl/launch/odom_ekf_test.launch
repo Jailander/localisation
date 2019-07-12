@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+
+<launch>
+
+  <!-- launch um7 imu -->
+  <arg name="port" default="/dev/ttyUSB0"/>
+  <node pkg="um7" type="um7_driver" name="um7_imu" output="screen">
+     <param name="port" value="$(arg port)"/>
+  </node> 
+
+
+  <node pkg="topic_tools" type="relay" name="relay_initial_estimate" clear_params="true"
+    args="/initialpose /set_pose" />
+
+
+  <!-- launch amcl but dont publish map->odom tf as this is handled by ekf_se_map -->
+  <!-- <include file="$(find mel_amcl)/launch/mel_amcl.launch"/> -->
+
+  <!-- load parameters for eKFs: odom & odom_imu  -->
+  <rosparam command="load" file="$(find mel_amcl)/config/odom_ekf_test.yaml" />
+
+  <!-- eKF odom onyl -->
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_odom" clear_params="true">
+    <remap from="odometry/filtered" to="odometry/odom_only"/>
+  </node>
+
+  <!-- eKF odom & imu fusion onyl -->
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_odom_imu" clear_params="true">
+    <remap from="odometry/filtered" to="odometry/odom_imu"/>
+  </node>
+
+  <!-- eKF for the gps in map frame, to use output, set use_gps_odom arg in mel_amcl to true --> 
+  <!-- <node pkg="robot_localization" type="ekf_localization_node" name="ekf_gps" clear_params="true">
+    <remap from="odometry/filtered" to="odometry/gps"/>
+  </node> -->
+
+
+</launch>
