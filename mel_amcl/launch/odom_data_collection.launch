@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+
+<launch>
+
+  <!-- launch um7 imu -->
+  <arg name="port" default="/dev/ttyUSB0"/>
+  <node pkg="um7" type="um7_driver" name="um7_imu" ns="um7" output="screen">
+     <param name="port" value="$(arg port)"/>
+  </node> 
+
+
+  <!-- load parameters for eKFs: odom & odom_imu  -->
+  <rosparam command="load" file="$(find mel_amcl)/config/odom_ekf_test.yaml" />
+
+  <!-- eKF odom onyl -->
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_odom" clear_params="true">
+    <remap from="odometry/filtered" to="odometry/odom_only"/>
+  </node>
+
+  <!-- eKF odom & imu fusion -->
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_odom_imu" clear_params="true">
+    <remap from="odometry/filtered" to="odometry/odom_imu"/>
+  </node>
+
+  <!-- bagging data -->
+  <node pkg="rosbag" type="record" name="rosbag_record_standard_data" respawn="true" output="screen" args="-o $(find mel_amcl)/bag_data/local_odom/local /tf_static /odometry/base_raw /cmd_vel /um7/imu/data /xsens/imu/data /scan" />
+
+</launch>
