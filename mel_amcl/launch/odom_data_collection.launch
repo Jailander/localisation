@@ -3,7 +3,7 @@
 <launch>
 
   <!-- launch um7 imu -->
-  <arg name="port" default="/dev/ttyUSB0"/>
+  <arg name="port" default="/dev/ttyUSB1"/>
   <node pkg="um7" type="um7_driver" name="um7_imu" ns="um7" output="screen">
      <param name="port" value="$(arg port)"/>
   </node> 
