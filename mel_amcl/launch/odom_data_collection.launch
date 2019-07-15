@@ -23,6 +23,6 @@
   </node>
 
   <!-- bagging data -->
-  <node pkg="rosbag" type="record" name="rosbag_record_standard_data" respawn="true" output="screen" args="-o $(find mel_amcl)/bag_data/local_odom/local /tf_static /odometry/base_raw /cmd_vel /um7/imu/data /xsens/imu/data /scan" />
+  <node pkg="rosbag" type="record" name="rosbag_record_standard_data" respawn="true" output="screen" args="-o $(find mel_amcl)/bag_data/local_odom/local_nice_square /tf_static /odometry/base_raw /cmd_vel /um7/imu/data /xsens/imu/data /scan" />
 
 </launch>
