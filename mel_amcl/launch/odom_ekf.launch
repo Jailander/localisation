@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+
+<launch>
+
+  <!-- load parameters for eKFs: odom & odom_imu  -->
+  <rosparam command="load" file="$(find mel_amcl)/config/odom_ekf.yaml" />
+
+  <!-- eKF odom & imu fusion onyl -->
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_odom_imu" clear_params="true">
+ <!--    <remap from="odometry/filtered" to="odometry/odom_imu"/>  -->
+  </node>
+
+</launch>
