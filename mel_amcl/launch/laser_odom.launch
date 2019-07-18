@@ -1,4 +1,4 @@
- <?xml version="1.0" encoding="ISO-8859-15"?>
+<?xml version="1.0" encoding="ISO-8859-15"?>
 
 <launch>
  
@@ -18,4 +18,4 @@
     <remap from="pose_with_covariance_stamped" to="odometry/laser_scan_match"/>
   </node>
 
-  </launch>
+</launch>
