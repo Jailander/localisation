@@ -1,6 +1,6 @@
 
 ekf_odom_imu:
-  frequency: 30
+  frequency: 50
   sensor_timeout: 0.1
   two_d_mode: false
   transform_time_offset: 0.0
@@ -35,7 +35,7 @@ ekf_odom_imu:
   imu0_nodelay: false
   imu0_differential: false
   imu0_relative: false
-  imu0_queue_size: 5
+  imu0_queue_size: 10
   imu0_pose_rejection_threshold: 0.8                 # Note the difference in parameter names
   imu0_twist_rejection_threshold: 0.8                #
   imu0_linear_acceleration_rejection_threshold: 0.8  #

@@ -6,7 +6,7 @@
 
   <!-- Play rosbag -->
   <arg name="path" default="$(find mel_amcl)/bag_data/local_odom/" />
-  <arg name="file_name" default="local_2019-07-15-13-47-10.bag" />
+  <arg name="file_name" default="local_skid_square_2019-07-15-14-00-02.bag" />
   <node pkg="rosbag" type="play" name="player" output="screen" args="--clock $(arg path)$(arg file_name) -r 2"/>
 
 
@@ -27,6 +27,10 @@
     <remap from="odometry/filtered" to="odometry/odom_imu"/>
   </node>
 
+  <!-- eKF odom & um7 imu with new odom twist covariances-->
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_odom_cov_imu" clear_params="true">
+    <remap from="odometry/filtered" to="odometry/odom_new_cov"/>
+  </node>
 
   <!-- eKF odom & um7 imu & laser fusion only -->
   <node pkg="robot_localization" type="ekf_localization_node" name="ekf_odom_imu_laser" clear_params="true">
