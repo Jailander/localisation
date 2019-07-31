@@ -300,7 +300,7 @@ Visualization Manager:
         Shaft Length: 1
         Shaft Radius: 0.0500000007
         Value: Arrow
-      Topic: /odometry/odom_imu_xsens
+      Topic: /odometry/odom_new_cov
       Unreliable: false
       Value: true
   Enabled: true

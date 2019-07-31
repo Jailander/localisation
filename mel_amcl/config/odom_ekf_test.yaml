@@ -75,7 +75,7 @@ ekf_odom_imu:
   print_diagnostics: true
   debug: false
   debug_out_file: /home/michael/Documents/rasberry start/Localisation/rl_odom_log.txt
-  publish_tf: false
+  publish_tf: true
 
   map_frame: map
   odom_frame: odom
@@ -375,7 +375,7 @@ ekf_odom_imu_xsens:
 
 
 ekf_odom_imu_laser:
-  frequency: 30
+  frequency: 10
   sensor_timeout: 0.1
   two_d_mode: false
   transform_time_offset: 0.0
@@ -391,7 +391,7 @@ ekf_odom_imu_laser:
   world_frame: odom
 
   odom0: /odometry/base_raw
-  odom0_config: [false, false, false,
+  odom0_config: [false, false, true,
                  false, false, false,
                  true,  true,  false,
                  false, false, true,
@@ -422,10 +422,10 @@ ekf_odom_imu_laser:
                  false, false, false,
                  false, false, false,
                  false, false, false]
-  pose0_differential: false
+  pose0_differential: true
   pose0_relative: false
   pose0_queue_size: 5
-  pose0_rejection_threshold: 1  # Note the difference in parameter name
+  pose0_rejection_threshold: 0.1  # Note the difference in parameter name
   pose0_nodelay: true #false (my previous value)
   
 

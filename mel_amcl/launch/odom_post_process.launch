@@ -6,8 +6,8 @@
 
   <!-- Play rosbag -->
   <arg name="path" default="$(find mel_amcl)/bag_data/local_odom/" />
-  <arg name="file_name" default="local_skid_square_2019-07-15-14-00-02.bag" />
-  <node pkg="rosbag" type="play" name="player" output="screen" args="--clock $(arg path)$(arg file_name) -r 2"/>
+  <arg name="file_name" default="in_out_ABU_2019-07-25-12-33-26.bag" />
+  <node pkg="rosbag" type="play" name="player" output="screen" args="--clock $(arg path)$(arg file_name) -r 1"/>
 
 
   <!-- rviz -->
@@ -53,7 +53,7 @@
     name="laser_scan_matcher_node" output="screen">
     <param name="max_iterations" value="20"/>
     <param name="fixed_frame" value="odom"/>
-    <param name="publish_tf" value="true"/>
+    <param name="publish_tf" value="false"/>
     <remap from="pose_with_covariance_stamped" to="odometry/laser_scan_match"/>
   </node>
 

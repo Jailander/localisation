@@ -76,7 +76,7 @@ def laserCallback(data):
 def odomIMULaserCallback(data):
     x4.append(data.pose.pose.position.x)
     y4.append(data.pose.pose.position.y)
-   
+    print data.pose.pose.position.x, data.pose.pose.position.y
    
    
 #def main():
