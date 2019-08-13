@@ -279,7 +279,7 @@ ekf_odom_imu_xsens:
   print_diagnostics: true
   debug: false
   debug_out_file: /home/michael/Documents/rasberry start/Localisation/rl_odom_log.txt
-  publish_tf: false
+  publish_tf: true
 
   map_frame: map
   odom_frame: odom
