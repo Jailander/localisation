@@ -20,6 +20,10 @@ find_package(catkin REQUIRED
     tf2_geometry_msgs
     tf2_msgs
     tf2_ros
+    mapviz
+    mapviz_plugins
+    robot_localization
+    gmapping
 )
 
 find_package(Boost REQUIRED)
@@ -78,7 +82,9 @@ add_library(mel_amcl_map
 add_library(mel_amcl_sensors
                     src/mel_amcl/sensors/mel_amcl_sensor.cpp
                     src/mel_amcl/sensors/mel_amcl_odom.cpp
-                    src/mel_amcl/sensors/mel_amcl_laser.cpp)
+                    src/mel_amcl/sensors/mel_amcl_laser.cpp
+                    src/mel_amcl/sensors/mel_amcl_pose.cpp
+                    )
 target_link_libraries(mel_amcl_sensors mel_amcl_map mel_amcl_pf)
 
 
