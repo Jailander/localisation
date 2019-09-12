@@ -3,7 +3,7 @@
 <launch>
 
   <!-- launch um7 imu -->
-  <arg name="port" default="/dev/ttyUSB1"/>
+  <arg name="port" default="/dev/ttyUSB0"/>
   <node pkg="um7" type="um7_driver" name="um7_imu" ns="um7" output="screen">
      <param name="port" value="$(arg port)"/>
   </node> 
@@ -23,6 +23,6 @@
   </node>
 
   <!-- bagging data -->
-  <node pkg="rosbag" type="record" name="rosbag_record_standard_data" respawn="true" output="screen" args="-o $(find mel_amcl)/bag_data/local_odom/local_nice_square /tf_static /odometry/base_raw /cmd_vel /um7/imu/data /xsens/imu/data /scan" />
+  <node pkg="rosbag" type="record" name="rosbag_record_standard_data" respawn="true" output="screen" args="-o $(find mel_amcl)/bag_data/local_odom/aroundTunnelXsensMTIG /tf_static /odometry/base_raw /cmd_vel /um7/imu/data /xsens/imu/data /scan" />
 
 </launch>
