@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+
+<launch>
+
+  <arg name="site_name" default="riseholme" />
+
+  <arg name="ekf_publish_tf" default="false" />
+
+
+  <rosparam command="load" file="$(find robot_localization)/config/datums/$(arg site_name).yaml" />
+
+  <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" clear_params="true" if="$(arg use_gps)">     
+      <!-- Placeholders for input remapping. Set your topic names as the "to" values. -->
+      <!-- <remap from="imu/data" to="yaw"/> -->
+      <remap from="odometry/filtered" to="odometry/gps"/>
+      <remap from="/fix" to="/fix"/>
+      <remap from="odometry/gps" to="odometry/gps/unfiltered"/>
+  </node>
+
+
+
+  <!-- load parameters for eKFs: odom, and separate gps -->
+  <rosparam command="load" file="$(find robot_localization)/config/garford_localisation.yaml" />
+
+  <!-- eKF for the odom frame -->
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_local" clear_params="true" if="$(arg ekf_publish_tf)">
+    <!-- <remap from="odometry/filtered" to="rl/odom"/> -->
+  </node>
+
+
+  <!-- eKF for the gps in map frame, to use output, set use_gps_odom arg in mel_amcl to true --> 
+  <node pkg="robot_localization" type="ekf_localization_node" name="ekf_gps" clear_params="true" if="$(arg use_gps)">
+    <remap from="odometry/filtered" to="odometry/gps"/>
+  </node> 
+
+
+  <node pkg="mel_amcl" type="run_mapproxy.sh" name="mapproxy"></node>
+
+
+  <node pkg="mapviz" type="mapviz" name="mapviz"></node>
+
+  <rosparam file="$(find mel_amcl)/config/datums/$(arg site_name).yaml" command="load"/>
+  
+  <node pkg="swri_transform_util" type="initialize_origin.py" name="mapviz_initialize_origin" >
+    <param name="local_xy_frame" value="/map"/>
+    <param name="local_xy_origin" value="dont_change_this"/>
+  </node>
+
+  <node pkg="tf" type="static_transform_publisher" name="swri_transform" args="0 0 0 0 0 0 /map /origin 100"  />
+
+
+</launch>
