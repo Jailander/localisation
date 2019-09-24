@@ -5,9 +5,10 @@
   <arg name="site_name" default="riseholme" />
 
   <arg name="ekf_publish_tf" default="false" />
+  <arg name="use_gps" default="true" />
 
 
-  <rosparam command="load" file="$(find robot_localization)/config/datums/$(arg site_name).yaml" />
+  <rosparam command="load" file="$(find mel_amcl)/config/datums/$(arg site_name).yaml" />
 
   <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" clear_params="true" if="$(arg use_gps)">     
       <!-- Placeholders for input remapping. Set your topic names as the "to" values. -->
@@ -20,7 +21,7 @@
 
 
   <!-- load parameters for eKFs: odom, and separate gps -->
-  <rosparam command="load" file="$(find robot_localization)/config/garford_localisation.yaml" />
+  <rosparam command="load" file="$(find mel_amcl)/config/garford_localisation.yaml" />
 
   <!-- eKF for the odom frame -->
   <node pkg="robot_localization" type="ekf_localization_node" name="ekf_local" clear_params="true" if="$(arg ekf_publish_tf)">
