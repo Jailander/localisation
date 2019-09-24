@@ -2,7 +2,7 @@
 
 <launch>
 
-  <arg name="site_name" default="riseholme" />
+  <arg name="site_name" default="walled_garden" />
 
   <arg name="ekf_publish_tf" default="false" />
   <arg name="use_gps" default="true" />
