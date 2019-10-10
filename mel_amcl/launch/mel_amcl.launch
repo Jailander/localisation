@@ -72,7 +72,7 @@
 	<!-- odometry model -->
     <param name="odom_model_type" value="omni-corrected" if="$(arg use_omni)"/>
     <param name="odom_model_type" value="diff-corrected" unless="$(arg use_omni)"/>
-    <param name="odom_alpha1" value="0.08"/> <!-- 0.014 -->
+    <param name="odom_alpha1" value="0.08"/> <!-- 0.014  -->
     <param name="odom_alpha2" value="0.08"/>
     <param name="odom_alpha3" value="0.08"/>
     <param name="odom_alpha4" value="0.08"/>
